@@ -1,0 +1,27 @@
+worker_processes  2;
+error_log /dev/stdout info;
+
+daemon off;
+
+events {
+    worker_connections 256;
+}
+
+http {
+    access_log /dev/stdout;
+    server {
+        listen <%= ENV["PORT"] %>;
+
+        location / {
+            proxy_pass <%= ENV["APP_URL"] %>;
+        }
+
+        location /api {
+            proxy_pass <%= ENV["API_URL"] %>;
+        }
+
+        if ($http_x_forwarded_proto != "https") {
+            rewrite ^(.*)$ https://$host$1 permanent;
+        }
+    }
+}

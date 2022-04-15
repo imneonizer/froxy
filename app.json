@@ -1,0 +1,21 @@
+{
+    "name": "Reverse Proxy",
+    "description": "Spin up a reverse proxy quickly on Heroku",
+    "keywords": [
+        "reverse proxy",
+        "nginx"
+    ],
+    "repository": "https://github.com/imneonizer/froxy",
+    "buildpacks": [
+        {
+            "url": "http://github.com/octoberswimmer/heroku-buildpack-nginx.git"
+        }
+    ],
+    "env": {
+        "APP_URL": {
+            "description": "App url"
+        },
+        "API_URL": {"description": "Api url"}
+    },
+    "stack": "heroku-18"
+}
